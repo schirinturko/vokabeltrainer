@@ -1,0 +1,20 @@
+GET http://localhost:8080/hello
+Accept: application/json
+###
+
+GET http://localhost:8080/food
+Accept: application/json
+
+###
+
+POST http://localhost:8080/food/findAllFood
+Content-Type: application/json
+
+{
+  "GERword": "a",
+  "Enword": "a",
+  "rightOrWrong": "a",
+  "rightAnswer": "a",
+  "numberOfRightAnswers": "a",
+  "numberOfWrongAnswers": "a"
+}
