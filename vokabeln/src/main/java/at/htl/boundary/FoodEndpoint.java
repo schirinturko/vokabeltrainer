@@ -4,8 +4,6 @@ import at.htl.control.FoodRepository;
 import at.htl.entity.Food;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,59 +16,76 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class FoodEndpoint {
 
-    @PersistenceContext
-    EntityManager em;
-
     @Inject
     FoodRepository foodRepository;
 
     //hello - test
     @GET
     @Path("/hello")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String hello() {
-        return "hello";
+        return "hello (Food)";
     }
 
-    //findAllFood
+    //find all food words
     @GET
-    @Path("/findAllFood")
     /*public List<Food> findAllFood(){
         return foodRepository.listAll();
     } ODER: */
-    public Response findAllFood(){
+    public Response findAllFood() {
         List<Food> findAllFood = foodRepository.listAll();
         return Response.ok(findAllFood).build();
     }
 
-    //findById
+    //find food word by id
     @GET
     @Path("/{id}")
-    public Response findById(@PathParam("id") Long id){
-        Food food = foodRepository.findById();
-        return Response.ok(food).build();
+    public Response findFoodById(@PathParam("id") Long id) {
+        Food food = foodRepository.findFoodById(id);
+        return Response.ok(food.getENword()).build();
     }
 
-    //createFood
+    //create food words -> Repo
     @POST
     @Path("/createFood")
-    public Response createFood(Food food){
-        em.persist(food);
+    public Response createFood(Food food) {
+        foodRepository.createFood(food);
         return Response.ok().build();
     }
 
+    //update food word by id -> Repo
     @PUT
     @Path("/updateFood/{id}")
-    public Response updateFood(Food food, @PathParam("id") Long id){
-        Food food1 = em.find(Food.class, id);
-        em.merge(food1);
-        return Response.ok(food1).build();
+    public Response updateFood(Food food, @PathParam("id") Long id) {
+        return Response.ok().build();
     }
 
+    //delete food word by id
     @DELETE
     @Path("/deleteFood/{id}")
-    public Response deleteFood(@PathParam("id") Long id){
+    public Response deleteFoodById(@PathParam("id") Long id) {
         foodRepository.delete("id", id);
         return Response.ok().build();
+    }
+
+    //delete all food words
+    @DELETE
+    @Path("/deleteFood")
+    public Response deleteFood() {
+        foodRepository.deleteAll();
+        return Response.ok().build();
+    }
+
+    //send answer
+    @POST
+    @Path("/{id}")
+    public Response sendFoodAnswer(@PathParam("id") Long id, @QueryParam("answer") String answer) {
+        Food food = foodRepository.findFoodById(id);
+        if (answer.equals(food.getGERword())) {
+            return Response.ok(false).build();
+        } else {
+            return Response.ok(true).build();
+        }
+        //return Response.ok(answer).build();
     }
 }
