@@ -1,0 +1,43 @@
+//Test
+GET http://localhost:8080/food/hello
+Accept: application/json
+
+###
+//create a food word
+POST http://localhost:8080/food/createFood
+Content-Type: application/json
+
+{
+  "GERword": "Huhn",
+  "ENword": "chicken",
+  "numberOfRightAnswers": 0,
+  "numberOfWrongAnswers": 0
+}
+
+###
+//get all food words from db
+GET http://localhost:8080/food
+Accept: application/json
+
+###
+//get food word from db by id
+GET http://localhost:8080/food/2
+Accept: application/json
+
+###
+//answer
+POST http://localhost:8080/food/2?answer=Huhn
+Content-Type: application/json
+
+###
+//delete all food words from db
+DELETE http://localhost:8080/food/deleteFood
+Accept: application/json
+
+###
+//delete food word from db by id
+DELETE http://localhost:8080/food/deleteFood/1
+Accept: application/json
+
+###
+
