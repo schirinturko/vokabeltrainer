@@ -1,0 +1,43 @@
+//Test
+GET http://localhost:8080/traffic/hello
+Accept: application/json
+
+###
+//create a traffic word
+POST http://localhost:8080/traffic/createTraffic
+Content-Type: application/json
+
+{
+  "GERword": "Auto",
+  "ENword": "car",
+  "numberOfRightAnswers": 0,
+  "numberOfWrongAnswers": 0
+}
+
+###
+//get all traffic words from db
+GET http://localhost:8080/traffic
+Accept: application/json
+
+###
+//get traffic word from db by id
+GET http://localhost:8080/traffic/1
+Accept: application/json
+
+###
+//answer
+POST http://localhost:8080/traffic/1?answer=car
+Content-Type: application/json
+
+###
+//delete all traffic words from db
+DELETE http://localhost:8080/traffic/deleteTraffic
+Accept: application/json
+
+###
+//delete traffic word from db by id
+DELETE http://localhost:8080/traffic/deleteTraffic/1
+Accept: application/json
+
+###
+
