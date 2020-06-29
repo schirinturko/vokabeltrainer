@@ -9,4 +9,15 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 @Transactional
 public class TrafficRepository implements PanacheRepository<Traffic> {
+
+    //findById
+    public Traffic findTrafficById(Long id){
+        return findById(id);
+    }
+
+    //createFood
+    public Traffic createTraffic(Traffic traffic){
+        persist(traffic);
+        return traffic;
+    }
 }
