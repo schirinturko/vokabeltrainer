@@ -14,10 +14,6 @@ public class Traffic {
     private String GERword;
     @Column(name = "T_EN_WORD", length = 100)
     private String ENword;
-    @Column(name = "T_RIGT_WRONG", length = 50)
-    private boolean rightOrWrong;
-    @Column(name = "T_RIGHT_ANSW", length = 100)
-    private String rightAnswer;
     @Column(name = "T_NUM_RIGHT_ANSW", length = 2)
     private int numberOfRightAnswers;
     @Column(name = "T_NUM_WRONG_ANSW", length = 2)
@@ -26,12 +22,10 @@ public class Traffic {
     public Traffic() {
     }
 
-    public Traffic(Long id, String GERword, String ENword, boolean rightOrWrong, String rightAnswer, int numberOfRightAnswers, int numberOfWrongAnswers) {
+    public Traffic(Long id, String GERword, String ENword, int numberOfRightAnswers, int numberOfWrongAnswers) {
         this.id = id;
         this.GERword = GERword;
         this.ENword = ENword;
-        this.rightOrWrong = rightOrWrong;
-        this.rightAnswer = rightAnswer;
         this.numberOfRightAnswers = numberOfRightAnswers;
         this.numberOfWrongAnswers = numberOfWrongAnswers;
     }
@@ -60,22 +54,6 @@ public class Traffic {
         this.ENword = ENword;
     }
 
-    public boolean isRightOrWrong() {
-        return rightOrWrong;
-    }
-
-    public void setRightOrWrong(boolean rightOrWrong) {
-        this.rightOrWrong = rightOrWrong;
-    }
-
-    public String getRightAnswer() {
-        return rightAnswer;
-    }
-
-    public void setRightAnswer(String rightAnswer) {
-        this.rightAnswer = rightAnswer;
-    }
-
     public int getNumberOfRightAnswers() {
         return numberOfRightAnswers;
     }
@@ -98,8 +76,6 @@ public class Traffic {
                 "id=" + id +
                 ", GERword='" + GERword + '\'' +
                 ", ENword='" + ENword + '\'' +
-                ", rightOrWrong=" + rightOrWrong +
-                ", rightAnswer='" + rightAnswer + '\'' +
                 ", numberOfRightAnswers=" + numberOfRightAnswers +
                 ", numberOfWrongAnswers=" + numberOfWrongAnswers +
                 '}';
