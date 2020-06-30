@@ -80,10 +80,14 @@ public class TrafficEndpoint {
     @Path("/{id}")
     public Response sendTrafficAnswer(@PathParam("id") Long id, @QueryParam("answer") String answer) {
         Traffic traffic = trafficRepository.findTrafficById(id);
-        if (answer.equals(traffic.getGERword())) {
-            return Response.ok(false).build();
+        if (answer.equalsIgnoreCase(traffic.getGERword())) {
+            traffic.setNumberOfRightAnswers(traffic.getNumberOfRightAnswers() + 1);
+            return Response.ok("TRUE \n No. of right answers: " + traffic.getNumberOfRightAnswers()).build();
+
         } else {
-            return Response.ok(true).build();
+            traffic.setNumberOfWrongAnswers(traffic.getNumberOfWrongAnswers() + 1);
+            return Response.ok("FALSE \n No. of wrong answers: " + traffic.getNumberOfWrongAnswers()).build();
+
         }
         //return Response.ok(answer).build();
     }
