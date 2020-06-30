@@ -26,7 +26,7 @@ Accept: application/json
 
 ###
 //answer
-POST http://localhost:8080/traffic/1?answer=car
+POST http://localhost:8080/traffic/1?answer=Auto
 Content-Type: application/json
 
 ###
