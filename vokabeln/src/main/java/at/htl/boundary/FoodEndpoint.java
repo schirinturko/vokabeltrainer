@@ -81,10 +81,13 @@ public class FoodEndpoint {
     @Path("/{id}")
     public Response sendFoodAnswer(@PathParam("id") Long id, @QueryParam("answer") String answer) {
         Food food = foodRepository.findFoodById(id);
-        if (answer.equals(food.getGERword())) {
-            return Response.ok(false).build();
+        if (answer.equalsIgnoreCase(food.getGERword())) {
+            food.setNumberOfRightAnswers(food.getNumberOfRightAnswers() + 1);
+            return Response.ok("TRUE \n No. of right answers: " + food.getNumberOfRightAnswers()).build();
+
         } else {
-            return Response.ok(true).build();
+            food.setNumberOfWrongAnswers(food.getNumberOfWrongAnswers() + 1);
+            return Response.ok("FALSE \n No. of wrong answers: " + food.getNumberOfWrongAnswers()).build();
         }
         //return Response.ok(answer).build();
     }
