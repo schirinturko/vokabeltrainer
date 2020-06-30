@@ -8,8 +8,8 @@ POST http://localhost:8080/food/createFood
 Content-Type: application/json
 
 {
-  "GERword": "Huhn",
-  "ENword": "chicken",
+  "GERword": "Apfel",
+  "ENword": "apple",
   "numberOfRightAnswers": 0,
   "numberOfWrongAnswers": 0
 }
@@ -21,12 +21,12 @@ Accept: application/json
 
 ###
 //get food word from db by id
-GET http://localhost:8080/food/2
+GET http://localhost:8080/food/1
 Accept: application/json
 
 ###
 //answer
-POST http://localhost:8080/food/2?answer=Huhn
+POST http://localhost:8080/food/1?answer=Apfel
 Content-Type: application/json
 
 ###
